@@ -1,4 +1,16 @@
-# Getting Started with GitHub Copilot
+<img src=https://octodex.github.com/images/welcometocat.png align=right height=250px />
+
+⭐️ Congratulations ArtiTanna! ⭐️
+
+You completed this exercise! Nice work! 🥳
+
+If you would like to practice again, you can retrace your steps below. Just press the **Start Exercise** button again.
+
+> [!TIP]
+> Mona won't grade you this time! 😉
+
+
+ # Getting Started with GitHub Copilot
 
 ![](https://github.com/ArtiTanna/skills-getting-started-with-github-copilot/actions/workflows/1-preparing.yml/badge.svg)
 ![](https://github.com/ArtiTanna/skills-getting-started-with-github-copilot/actions/workflows/2-first-introduction.yml/badge.svg)
