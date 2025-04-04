@@ -1,45 +1,52 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const activitiesList = document.getElementById("activities-list");
+  const activitiesContainer = document.getElementById("activities-list");
   const activitySelect = document.getElementById("activity");
   const signupForm = document.getElementById("signup-form");
   const messageDiv = document.getElementById("message");
 
-  // Function to fetch activities from API
-  async function fetchActivities() {
-    try {
-      const response = await fetch("/activities");
-      const activities = await response.json();
+  // Example data structure for activities
+  const activities = [
+    {
+      name: "Basketball",
+      description: "Join the basketball team and improve your skills!",
+      participants: ["john.doe@mergington.edu", "jane.smith@mergington.edu"],
+    },
+    {
+      name: "Drama Club",
+      description: "Express yourself through acting and theater.",
+      participants: ["alice.jones@mergington.edu"],
+    },
+  ];
 
-      // Clear loading message
-      activitiesList.innerHTML = "";
+  // Clear the loading message
+  activitiesContainer.innerHTML = "";
 
-      // Populate activities list
-      Object.entries(activities).forEach(([name, details]) => {
-        const activityCard = document.createElement("div");
-        activityCard.className = "activity-card";
+  // Populate activities
+  activities.forEach((activity) => {
+    const activityCard = document.createElement("div");
+    activityCard.classList.add("activity-card");
 
-        const spotsLeft = details.max_participants - details.participants.length;
+    activityCard.innerHTML = `
+      <h4>${activity.name}</h4>
+      <p>${activity.description}</p>
+      <div class="participants">
+        <h5>Participants:</h5>
+        <ul>
+          ${activity.participants
+            .map((participant) => `<li>${participant}</li>`)
+            .join("")}
+        </ul>
+      </div>
+    `;
 
-        activityCard.innerHTML = `
-          <h4>${name}</h4>
-          <p>${details.description}</p>
-          <p><strong>Schedule:</strong> ${details.schedule}</p>
-          <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
-        `;
+    activitiesContainer.appendChild(activityCard);
 
-        activitiesList.appendChild(activityCard);
-
-        // Add option to select dropdown
-        const option = document.createElement("option");
-        option.value = name;
-        option.textContent = name;
-        activitySelect.appendChild(option);
-      });
-    } catch (error) {
-      activitiesList.innerHTML = "<p>Failed to load activities. Please try again later.</p>";
-      console.error("Error fetching activities:", error);
-    }
-  }
+    // Add option to select dropdown
+    const option = document.createElement("option");
+    option.value = activity.name;
+    option.textContent = activity.name;
+    activitySelect.appendChild(option);
+  });
 
   // Handle form submission
   signupForm.addEventListener("submit", async (event) => {
@@ -80,7 +87,4 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Error signing up:", error);
     }
   });
-
-  // Initialize app
-  fetchActivities();
 });
